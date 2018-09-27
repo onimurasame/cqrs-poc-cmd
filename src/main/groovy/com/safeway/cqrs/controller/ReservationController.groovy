@@ -1,6 +1,6 @@
 package com.safeway.cqrs.controller
 
-import com.safeway.cqrs.event.CreateReservationCommand
+import com.safeway.cqrs.command.CreateReservation
 import groovy.util.logging.Slf4j
 import org.axonframework.commandhandling.gateway.CommandGateway
 import org.springframework.beans.factory.annotation.Autowired
@@ -27,7 +27,7 @@ class ReservationController {
 
         UUID reservationId = UUID.randomUUID()
 
-        CreateReservationCommand createReservationCommand = new CreateReservationCommand([id: reservationId, type: type])
+        CreateReservation createReservationCommand = new CreateReservation([id: reservationId, type: type])
 
         return commandGateway.send(createReservationCommand)
 
