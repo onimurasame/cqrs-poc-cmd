@@ -1,0 +1,3 @@
+rootProject.name = 'cqrs-poc-cmd'
+include(':cqrs-poc-core-api')
+project(":cqrs-poc-core-api").projectDir = file("../cqrs-poc-core-api")

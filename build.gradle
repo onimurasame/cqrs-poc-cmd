@@ -1,0 +1,55 @@
+buildscript {
+	ext {
+		springBootVersion = '2.0.5.RELEASE'
+	}
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+	}
+}
+
+apply plugin: 'groovy'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+group = 'com.safeway'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = 1.8
+
+repositories {
+	mavenCentral()
+}
+
+
+ext {
+	springCloudVersion = 'Finchley.SR1'
+    axonVersion = '3.3.5'
+}
+
+dependencies {
+	compile('org.springframework.boot:spring-boot-starter-data-jpa')
+	compile('org.springframework.boot:spring-boot-starter-web')
+    compile('org.springframework.boot:spring-boot-starter-actuator:2.0.5.RELEASE')
+    compile('org.springframework.boot:spring-boot-starter-hateoas:2.0.5.RELEASE')
+    //compile('org.springframework.cloud:spring-cloud-starter-netflix-eureka-client')
+	//compile('org.springframework.kafka:spring-kafka')
+    compile 'javax.xml.bind:jaxb-api:2.3.0'
+	compile('org.codehaus.groovy:groovy')
+	compile("org.axonframework:axon-spring-boot-starter:3.3.5")
+    compile project('cqrs-poc-core-api')
+
+	runtime('com.h2database:h2')
+
+	testCompile('org.springframework.boot:spring-boot-starter-test')
+    testCompile('org.axonframework:axon-test:3.3.5')
+
+}
+
+dependencyManagement {
+	imports {
+		mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+	}
+}
